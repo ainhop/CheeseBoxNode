@@ -1,0 +1,9 @@
+GET http://localhost:3000/usuario
+###
+
+GET http://localhost:3000/productos
+###
+GET http://localhost:3000/recetas
+
+GET http://localhost:3000/usuarios/productos
+GET http://localhost:3000/usuarios/recetas
