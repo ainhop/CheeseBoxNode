@@ -4,8 +4,13 @@ module.exports = router;
 const { getAll } = require("../../models/producto.models");
 
 router.get("/", async (req, res) => {
-  const rows = await getAll();
-  res.json(productos);
+  try{
+    const rows = await getAll()
+    res.json(rows)
+  } 
+  catch (error) {
+    (console.error('Ainho: Sigue buscando'))
+  }
 });
 
 router.post("/", async (req, res) => {

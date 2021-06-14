@@ -1,10 +1,95 @@
-GET http://localhost:3000/usuarios
-###
-
 GET http://localhost:3000/productos
 ###
+POST http://localhost:3000/productos/create
+Content-Type: application/json
+
+{
+  "nombre": "Mozarrella",
+  "descripcion": "Riquisiiimo",
+  "tipoLeche": "Oveja",
+  "origen": "Mozarrella",
+  "curiosidades": "es un queso para comerlos a todos",
+  "color": "Blanco",
+  "tipo": "Mozarrella"
+}
+
+
+###
+GET http://localhost:3000/productos/2
+
+###
+DELETE http://localhost:3000/productos/delete/42
+
+###     
+PUT http://localhost:3000/productos/update/33
+Content-Type: application/json
+
+{
+  "nombre": "Mozar",
+  "descripcion": "Riquisiiimo",
+  "tipoLeche": "Oveja",
+  "origen": "Mozarrella",
+  "curiosidades": "es un queso para comerlos a todos",
+  "color": "Blanco",
+  "tipo": "Mozarrella"
+}
+
+###
+DELETE http://localhost:3000/usuarios/delete/3
+
+### 
+PUT http://localhost:3000/usuarios/update/
+Content-Type: application/json
+
+{
+  "nombre": "Marianico",
+  "apellidos": "Portón",
+  "username": "MaPo",
+  "email": "mapo69@gmail.com",
+  "password": "1234",
+}
+###
+POST http://localhost:3000/usuarios/create
+Content-Type: application/json
+
+{
+  "nombre": "Marianico",
+  "apellidos": "Portón",
+  "username": "MaPo",
+  "email": "mapo69@gmail.com",
+  "password": "1234",
+}
+
 GET http://localhost:3000/recetas
 
-GET http://localhost:3000/usuarios/productos
+###
+POST http://localhost:3000/recetas/create
+Content-Type: application/json
 
-GET http://localhost:3000/usuarios/recetas
+{
+    "nombre": "Sandwich de queso", 
+    "quesoUtilizado": 2, 
+    "ingredientes": "pan bimbo, lonchas de queso",
+    "tiempo": "3 minutos", 
+    "raciones": 1, 
+    "elaboracion":"Pillas dos rebanadas de bimbo, las pones encima de la mesa, pillas entre 2-4 lonchas de queso, pones 2 encima de cada rebanada, las juntas (por el lado del queso) para que quede pan-queso-pan y te lo comes"
+}
+
+###
+GET http://localhost:3000/recetas/37
+
+###
+PUT http://localhost:3000/recetas/update/42
+Content-Type: application/json
+
+{
+    "nombre": "Sandwich de queso", 
+    "quesoUtilizado": 2, 
+    "ingredientes": "pan bimbo, lonchas de queso",
+    "tiempo": "3 minutos", 
+    "raciones": 1, 
+    "elaboracion":"Pillas dos rebanadas de bimbo, las pones encima de la mesa, pillas entre 2-4 lonchas de queso, pones 2 encima de cada rebanada, las juntas (por el lado del queso) para que quede pan-queso-pan y te lo comes"
+}
+
+###
+DELETE http://localhost:3000/recetas/delete/41
