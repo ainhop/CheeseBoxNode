@@ -26,7 +26,6 @@ require("dotenv").config();
 require("./dbConfing");
 
 const indexRouter = require("./routes/index");
-const usersRouter = require("./routes/users");
 const productosRouter = require("./routes/productos");
 const usuariosRouter = require("./routes/usuarios");
 const recetasRouter = require("./routes/recetas");
@@ -45,7 +44,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/", indexRouter);
-app.use("/users", usersRouter);
 app.use("/productos", productosRouter);
 app.use("/usuarios", usuariosRouter);
 app.use("/recetas", recetasRouter);
