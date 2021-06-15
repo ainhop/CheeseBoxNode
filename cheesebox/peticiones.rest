@@ -15,7 +15,7 @@ Content-Type: application/json
 
 
 ###
-GET http://localhost:3000/productos/2
+GET http://localhost:3000/productos/11
 
 ###
 DELETE http://localhost:3000/productos/delete/42
@@ -37,8 +37,11 @@ Content-Type: application/json
 ###
 DELETE http://localhost:3000/usuarios/delete/3
 
+###
+GET http://localhost:3000/usuarios/1
+
 ### 
-PUT http://localhost:3000/usuarios/update/
+PUT http://localhost:3000/usuarios/update/5
 Content-Type: application/json
 
 {
@@ -46,8 +49,9 @@ Content-Type: application/json
   "apellidos": "Portón",
   "username": "MaPo",
   "email": "mapo69@gmail.com",
-  "password": "1234",
+  "password": "1234"
 }
+
 ###
 POST http://localhost:3000/usuarios/create
 Content-Type: application/json
@@ -57,9 +61,10 @@ Content-Type: application/json
   "apellidos": "Portón",
   "username": "MaPo",
   "email": "mapo69@gmail.com",
-  "password": "1234",
+  "password": "1234"
 }
 
+###
 GET http://localhost:3000/recetas
 
 ###
