@@ -17,10 +17,11 @@ const create = ({
   origen,
   curiosidades,
   color,
-  tipo
+  tipo,
+  imagen
 }) => {
   return new Promise((resolve, reject) => {
-      db.query('insert into productos (nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo) values (?, ?, ?, ?, ?, ?, ?)', [ nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo], (err, result) => {
+      db.query('insert into productos (nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo, imagen) values (?, ?, ?, ?, ?, ?, ?, ?)', [ nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo, imagen], (err, result) => {
           if (err) reject(err);
           resolve(result);
       });
