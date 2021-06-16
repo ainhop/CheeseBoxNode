@@ -17,11 +17,12 @@ const create = ({
   tiempo,
   raciones,
   elaboracion,
+  imagen
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "insert into recetas (nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion) values (?, ?, ?, ?, ?, ?)",
-      [nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion],
+      "insert into recetas (nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion, imagen) values (?, ?, ?, ?, ?, ?, ?)",
+      [nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion, imagen],
       (err, result) => {
         if (err) reject(err);
         resolve(result);
@@ -42,11 +43,11 @@ const getById = (pId) => {
 
 const update = (
   pRecetaId,
-  { nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion }
+  { nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion, imagen}
 ) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "UPDATE recetas SET nombre = ?, quesoUtilizado = ?, ingredientes = ?, tiempo = ?, raciones = ?, elaboracion = ? WHERE id = ?",
+      "UPDATE recetas SET nombre = ?, quesoUtilizado = ?, ingredientes = ?, tiempo = ?, raciones = ?, elaboracion = ?, imagen = ? WHERE id = ?",
       [
         nombre,
         quesoUtilizado,
@@ -54,6 +55,7 @@ const update = (
         tiempo,
         raciones,
         elaboracion,
+        imagen,
         pRecetaId,
       ],
       (err, result) => {

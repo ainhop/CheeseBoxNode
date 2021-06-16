@@ -18,10 +18,12 @@ router.get("/", async (req, res) => {
     console.log("David: se ha roto esto");
   }
 });
+
 // POST http://localhost:3000/recetas/create
 router.post("/create", async (req, res) => {
   try {
     const result = await create(req.body);
+    console.log(result)
     res.json(result);
   } catch (error) {
     ("David dice super error");

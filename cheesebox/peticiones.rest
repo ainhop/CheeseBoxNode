@@ -35,7 +35,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/usuarios/delete/3
+DELETE http://localhost:3000/usuarios/delete/45
 
 ###
 GET http://localhost:3000/usuarios/1
@@ -104,7 +104,8 @@ Content-Type: application/json
     "ingredientes": "pan bimbo, lonchas de queso",
     "tiempo": "3 minutos", 
     "raciones": 1, 
-    "elaboracion":"Pillas dos rebanadas de bimbo, las pones encima de la mesa, pillas entre 2-4 lonchas de queso, pones 2 encima de cada rebanada, las juntas (por el lado del queso) para que quede pan-queso-pan y te lo comes"
+    "elaboracion":"Pillas dos rebanadas de bimbo, las pones encima de la mesa, pillas entre 2-4 lonchas de queso, pones 2 encima de cada rebanada, las juntas (por el lado del queso) para que quede pan-queso-pan y te lo comes",
+    "imagen":"hola"
 }
 
 ###
