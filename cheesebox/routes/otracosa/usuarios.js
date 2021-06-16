@@ -7,8 +7,8 @@ const { body, validationResult } = require("express-validator");
 const jwt = require("jsonwebtoken");
 
 //
-const usuariosUsuariosRouter = require("./usuarios/registro");
-router.use("/usuarios", otracosaUsuariosRouter);
+// const usuariosUsuariosRouter = require("./otracosa/registro");
+// router.use("/usuarios", otracosaUsuariosRouter);
 
 router.post(
   "/registro",

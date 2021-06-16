@@ -54,7 +54,6 @@ const update = (
   });
 };
 
-// validar si el email está registrado
 const getByEmail = (pEmail) => {
   return new Promise((resolve, reject) => {
     db.query("select * usuarios where email = ?", [pEmail], (err, rows) => {
