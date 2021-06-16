@@ -1,50 +1,68 @@
-const create = ({
-  nombre, apellidos, username, email, password
-}) => {
+const create = ({ nombre, apellidos, username, email, password }) => {
   return new Promise((resolve, reject) => {
-      db.query('insert into usuarios (nombre, apellidos, username, email, password) values (?, ?, ?, ?, ?)', [ nombre, apellidos, username, email, password], (err, result) => {
-          if (err) reject(err);
-          resolve(result);
-      });
+    db.query(
+      "insert into usuarios (nombre, apellidos, username, email, password) values (?, ?, ?, ?, ?)",
+      [nombre, apellidos, username, email, password],
+      (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      }
+    );
   });
-}
+};
 
 const getById = (pUsuarioId) => {
   return new Promise((resolve, reject) => {
-      db.query('select * from usuarios where id = ?', [pUsuarioId], (err, rows) => {
-          if (err) reject(err);
-          // if (rows.length !== 1) resolve(null);
-          resolve(rows[0]);
-      })
+    db.query(
+      "select * from usuarios where id = ?",
+      [pUsuarioId],
+      (err, rows) => {
+        if (err) reject(err);
+        // if (rows.length !== 1) resolve(null);
+        resolve(rows[0]);
+      }
+    );
   });
-}
-
+};
 
 const deleteById = (pUsuarioId) => {
-
   return new Promise((resolve, reject) => {
-      
-      db.query('delete from usuarios where id = ?', [pUsuarioId], (err, result) => {
-          
-          if (err) reject(err);
-          resolve(result)
-      });
+    db.query(
+      "delete from usuarios where id = ?",
+      [pUsuarioId],
+      (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      }
+    );
   });
-  
-}
-const update = (pUsuarioId, { nombre, apellidos, username, email, password }) => {
-   console.log('Algo me da igual') 
+};
+const update = (
+  pUsuarioId,
+  { nombre, apellidos, username, email, password }
+) => {
   return new Promise((resolve, reject) => {
-      db.query(
-          'UPDATE usuarios SET nombre = ?, apellidos = ?, username = ?, email = ?, password = ? where id = ?',
-          [nombre, apellidos, username, email, password, pUsuarioId],
-          (err, result) => {
-            if (err) reject(err);
-            console.log(result)
-              resolve(result);
-          });
+    db.query(
+      "UPDATE usuarios SET nombre = ?, apellidos = ?, username = ?, email = ?, password = ? where id = ?",
+      [nombre, apellidos, username, email, password, pUsuarioId],
+      (err, result) => {
+        if (err) reject(err);
+        console.log(result);
+        resolve(result);
+      }
+    );
   });
-}
+};
 
+// validar si el email está registrado
+const getByEmail = (pEmail) => {
+  return new Promise((resolve, reject) => {
+    db.query("select * usuarios where email = ?", [pEmail], (err, rows) => {
+      if (err) reject(err);
+      if (rows.length !== 1) resolve(null);
+      resolve(rows[0]);
+    });
+  });
+};
 
-module.exports = { create, getById, deleteById, update };
+module.exports = { create, getById, deleteById, update, getByEmail };
