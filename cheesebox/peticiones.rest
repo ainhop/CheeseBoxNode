@@ -10,7 +10,8 @@ Content-Type: application/json
   "origen": "Mozarrella",
   "curiosidades": "es un queso para comerlos a todos",
   "color": "Blanco",
-  "tipo": "Mozarrella"
+  "tipo": "Mozarrella",
+  "imagen": "Fotosubida"
 }
 
 
