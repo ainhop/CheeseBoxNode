@@ -13,16 +13,22 @@ const getAll = () => {
 const create = ({
   nombre,
   quesoUtilizado,
-  ingredientes,
   tiempo,
   raciones,
+  ingredientes,
   elaboracion,
   imagen
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "insert into recetas (nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion, imagen) values (?, ?, ?, ?, ?, ?, ?)",
-      [nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion, imagen],
+      "insert into recetas ( nombre, quesoUtilizado, tiempo, raciones, ingredientes, elaboracion, imagen) values (?, ?, ?, ?, ?, ?, ?)",
+      [ nombre,
+        quesoUtilizado,
+        tiempo,
+        raciones,
+        ingredientes,
+        elaboracion,
+        imagen],
       (err, result) => {
         if (err) reject(err);
         resolve(result);

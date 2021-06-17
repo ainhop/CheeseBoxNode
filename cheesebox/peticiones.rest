@@ -61,7 +61,8 @@ Content-Type: application/json
   "apellidos": "Portón",
   "username": "MaPo",
   "email": "mapo69@gmail.com",
-  "password": "1234"
+  "password": "1234",
+  "imagen": "adsaaqweqexqee.jpg"
 }
 
 ###

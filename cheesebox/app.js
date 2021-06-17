@@ -5,21 +5,6 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 const cors = require("cors");
 
-// para las fotos
-
-// const fs= require('fs'); (filesystem, que permite guardar los archivos en el servidor)
-// const multer = require('multer');
-// const upload = multer({dest: 'public/images'})
-
-// app.listen(3000, () => {
-//   console.log(`Servidor escuchando en el puerto 3000`)
-// })
-
-// multer colocado antes del manejador final.
-// en index.js / app.js
-// app.post('/upload', upload.single('imagen'), (req, res) => {
-//   res.send('check imagen');
-// })
 
 require("dotenv").config();
 require("./dbConfing");
