@@ -42,7 +42,8 @@ router.put("/update/:usuarioId", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-});
+})
+
 
 router.get("/:usuarioId", async (req, res) => {
   try {

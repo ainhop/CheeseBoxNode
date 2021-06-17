@@ -1,6 +1,5 @@
 var express = require("express");
 var router = express.Router();
-
 const {
   getAll,
   create,
@@ -8,6 +7,11 @@ const {
   update,
   deleteById,
 } = require("../models/receta.models");
+const path = require('path');
+const fs = require('fs')
+const multer = require('multer');
+const upload = multer({ dest: 'public/images/productos/' });
+const app = express();
 
 const path = require('path');
 const fs = require('fs')

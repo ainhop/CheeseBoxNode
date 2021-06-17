@@ -1,6 +1,16 @@
 var express = require('express');
 var router = express.Router();
 const { getAll, create, getById, update, deleteById } = require('../models/producto.models');
+const path = require('path');
+const fs = require('fs')
+const multer = require('multer');
+const upload = multer({ dest: 'public/images/productos/' });
+const app = express();
+
+app.use(express.json);
+app.use(express.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname, 'public')))
+
 
 const path = require('path');
 const fs = require('fs')
@@ -37,6 +47,8 @@ router.post('/create', upload.single('imagen'), async (req, res) => {
   }
 })
 
+
+
 router.get('/:productoId', async (req, res) => {
   try {
     const producto = await getById(req.params.productoId);
@@ -67,3 +79,6 @@ router.put('/update/:productosId', async (req, res) => {
   }
 })
 module.exports = router;
+// app.listen(3300, () => {
+//   console.log('El servidor esta escuchando en el puerto 3000')
+// } )
