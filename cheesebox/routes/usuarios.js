@@ -1,4 +1,5 @@
-var express = require("express").Router();
+var express = require('express');
+var router = express.Router();
 
 const {
   create,
@@ -7,14 +8,32 @@ const {
   getById,
 } = require("../models/usuario.models");
 
-const router = require("./otracosa/usuarios");
+const path = require('path');
+const fs = require('fs')
+const multer = require('multer');
+const upload = multer({ dest: 'public/images/usuarios/' });
+const app = express();
 
-// const usuariosProductosRouter = require("./usuarios/productos");
-// const usuariosRecetasRouter = require("./usuarios/recetas");
+app.use(express.json);
+app.use(express.urlencoded({ extended: false }))
+app.use(express.static(path.join(__dirname, 'public')))
 
-const { checkToken } = require("./middlewares");
-const usuariosUsuariosRouter = require("./otracosa/usuarios");
-router.use("/otracosa", usuariosUsuariosRouter);
+
+router.post('/create', upload.single('imagen'), async (req, res) => {
+  try {
+    const extension = '.' + req.file.mimetype.split('/')[1];
+    const newName = 'http://localhost:3000/images/usuarios/' + req.file.filename + extension;
+    const newPath = req.file.path + extension;
+    fs.renameSync(req.file.path, newPath )
+    req.body.imagen = newName
+    const result = await create(req.body);
+      res.json(result);
+  } catch (error) {
+      console.log(error);
+  }
+})
+
+
 
 router.put("/update/:usuarioId", async (req, res) => {
   try {
@@ -22,15 +41,6 @@ router.put("/update/:usuarioId", async (req, res) => {
     res.json(result);
   } catch (error) {
     console.log(error);
-  }
-});
-
-router.post("/create", async (req, res) => {
-  try {
-    const result = await create(req.body);
-    res.json(result);
-  } catch (error) {
-    ("error");
   }
 });
 
