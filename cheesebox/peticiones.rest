@@ -72,33 +72,20 @@ Content-Type: application/json
 }
 
 ###
-POST http://localhost:3000/otracosa/registro
+
+POST http://localhost:3000/usuarios/login
 Content-Type: application/json
 
 {
-  "nombre": "Marianico",
-  "apellidos": "Portón",
-  "username": "MaPo",
-  "email": "mapo69@gmail.com",
+  "email": "mapo69@gmail.com", 
   "password": "1234"
 }
 
 ###
- POST  http://localhost:3000/otracosa/login
- Content-Type: application/json
-
- {
-   "email": "", 
-   "password": ""
-  }
+GET http://localhost:3000/usuarios/test
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNiwiZW1haWwiOiJtYXBvNjlAZ21haWwuY29tIn0sImNhZHVjaWRhZCI6MTYyMzk3MDUzNywiaWF0IjoxNjIzOTcwMTE3fQ.E9zXbRtdXIN3dkqLJ3ge61DEYecAiN4S9aEenp_yJR
 
 ###
-
-PUT localhost.3000/usuarios/algoaqui
-http: Authorization: "un string";
-
-###
-
 GET http://localhost:3000/recetas
 
 ###

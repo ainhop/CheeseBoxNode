@@ -56,11 +56,16 @@ const update = (
 
 const getByEmail = (pEmail) => {
   return new Promise((resolve, reject) => {
-    db.query("select * usuarios where email = ?", [pEmail], (err, rows) => {
-      if (err) reject(err);
-      if (rows.length !== 1) resolve(null);
-      resolve(rows[0]);
-    });
+    db.query(
+      "select * from usuarios where email = ?",
+      [pEmail],
+      (err, rows) => {
+        if (err) reject(err);
+
+        if (rows.length !== 1) resolve(null);
+        resolve(rows[0]);
+      }
+    );
   });
 };
 
