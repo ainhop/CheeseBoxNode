@@ -1,4 +1,9 @@
-GET http://localhost:3000/productos
+
+GET http://localhost:3000/
+
+###
+GET http://localhost:3000/productos/vaca
+
 ###
 POST http://localhost:3000/productos/create
 Content-Type: application/json
@@ -95,6 +100,9 @@ http: Authorization: "un string";
 ###
 
 GET http://localhost:3000/recetas
+
+###
+GET http://localhost:3000/recetas/pan
 
 ###
 POST http://localhost:3000/recetas/create
