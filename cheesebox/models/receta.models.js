@@ -1,12 +1,26 @@
 // Métodos para acceder a la base de datos de la tabla recetas
 
 // obtener todas las recetas
-const getAll = () => {
+// const getAll = () => {
+//   return new Promise((resolve, reject) => {
+//     db.query("select * from recetas", (err, rows) => {
+//       if (err) reject(err);
+//       resolve(rows);
+//     });
+//   });
+// };
+
+// obtener todas las recetas. limitado por páginas
+const getAll = (limit, page) => {
   return new Promise((resolve, reject) => {
-    db.query("select * from recetas", (err, rows) => {
-      if (err) reject(err);
-      resolve(rows);
-    });
+    db.query(
+      "select * from recetas limit ?, ?",
+      [limit * (page - 1), limit],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      }
+    );
   });
 };
 
@@ -17,18 +31,20 @@ const create = ({
   raciones,
   ingredientes,
   elaboracion,
-  imagen
+  imagen,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
       "insert into recetas ( nombre, quesoUtilizado, tiempo, raciones, ingredientes, elaboracion, imagen) values (?, ?, ?, ?, ?, ?, ?)",
-      [ nombre,
+      [
+        nombre,
         quesoUtilizado,
         tiempo,
         raciones,
         ingredientes,
         elaboracion,
-        imagen],
+        imagen,
+      ],
       (err, result) => {
         if (err) reject(err);
         resolve(result);
@@ -49,7 +65,15 @@ const getById = (pId) => {
 
 const update = (
   pRecetaId,
-  { nombre, quesoUtilizado, ingredientes, tiempo, raciones, elaboracion, imagen}
+  {
+    nombre,
+    quesoUtilizado,
+    ingredientes,
+    tiempo,
+    raciones,
+    elaboracion,
+    imagen,
+  }
 ) => {
   return new Promise((resolve, reject) => {
     db.query(
