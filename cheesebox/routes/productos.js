@@ -11,6 +11,7 @@ const {
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
+const { checkToken } = require("../middlewares/middleware");
 const upload = multer({ dest: "public/images/productos/" });
 const app = express();
 
@@ -41,7 +42,8 @@ router.get("/search/:producto", async (req, res) => {
     res.json("Ups algo no fue bien");
   }
 });
-router.post("/create", upload.single("imagen"), async (req, res) => {
+router.post("/create", checkToken, upload.single("imagen"), async (req, res) => {
+  console.log(req.user)
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
     const newName =
@@ -49,6 +51,7 @@ router.post("/create", upload.single("imagen"), async (req, res) => {
     const newPath = req.file.path + extension;
     fs.renameSync(req.file.path, newPath);
     req.body.imagen = newName;
+    req.body.fk_usuario = req.user.id;
     const result = await create(req.body);
     res.json(result);
   } catch (error) {
