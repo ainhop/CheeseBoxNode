@@ -1,10 +1,17 @@
 var express = require("express");
 var router = express.Router();
-const { getAll, create, getById, update, deleteById, getByItem } = require('../models/producto.models');
-const path = require('path');
-const fs = require('fs')
-const multer = require('multer');
-const upload = multer({ dest: 'public/images/productos/' });
+const {
+  getAll,
+  create,
+  getById,
+  update,
+  deleteById,
+  getByItem,
+} = require("../models/producto.models");
+const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: "public/images/productos/" });
 const app = express();
 
 app.use(express.json);
@@ -27,17 +34,15 @@ router.get("/:producto", async (req, res) => {
   try {
     const producto = await getByItem(req.params.producto);
     if (producto) {
-      res.json(producto)
- 
+      res.json(producto);
     } else {
-      ('este queso no está')
+      ("este queso no está");
     }
-  }
-  catch(error) {
-    res.json('Ups algo no fue bien')
+  } catch (error) {
+    res.json("Ups algo no fue bien");
   }
 });
-router.post('/create', upload.single('imagen'), async (req, res) => {
+router.post("/create", upload.single("imagen"), async (req, res) => {
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
     const newName =
@@ -77,10 +82,7 @@ router.put("/update/:productosId", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
- catch (error) {
-  console.log(error)
-  }
-})
+});
 
 module.exports = router;
 // app.listen(3300, () => {

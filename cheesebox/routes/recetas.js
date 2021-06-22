@@ -6,8 +6,14 @@ const {
   getById,
   update,
   deleteById,
-  getByItem
+  getByItem,
 } = require("../models/receta.models");
+
+const path = require("path");
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: "public/images/productos/" });
+const app = express();
 
 app.use(express.json);
 app.use(express.urlencoded({ extended: false }));
@@ -34,23 +40,20 @@ router.get("/", async (req, res) => {
   }
 });
 
-
 router.get("/:recetas", async (req, res) => {
   try {
     const recetas = await getByItem(req.params.recetas);
     if (recetas) {
-      res.json(recetas)
- 
+      res.json(recetas);
     } else {
-      ('este queso no está')
+      ("este queso no está");
     }
-  }
-  catch(error) {
-    res.json('Ups algo no fue bien')
+  } catch (error) {
+    res.json("Ups algo no fue bien");
   }
 });
 
-router.post('/create', upload.single('imagen'), async (req, res) => {
+router.post("/create", upload.single("imagen"), async (req, res) => {
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
     const newName =
