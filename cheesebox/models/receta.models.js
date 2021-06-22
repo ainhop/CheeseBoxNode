@@ -53,6 +53,17 @@ const create = ({
   });
 };
 
+const getByItem = (pValor) => {
+  console.log(pValor)
+    return new Promise((resolve, reject) => {
+  
+      db.query(`SELECT * FROM cheesebox.productos WHERE nombre LIKE '%${pValor}%' or descripcion LIKE '%${pValor}%'`, (err, result) => {
+        if (err) reject(result);
+        resolve(result);
+      });
+    })
+};
+  
 const getById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query("select * from recetas where id = ?", [pId], (err, rows) => {
@@ -111,4 +122,5 @@ module.exports = {
   getById,
   update,
   deleteById,
+  getByItem
 };

@@ -1,4 +1,9 @@
-GET http://localhost:3000/productos
+
+GET http://localhost:3000/
+
+###
+GET http://localhost:3000/productos/vaca
+
 ###
 POST http://localhost:3000/productos/create
 Content-Type: application/json
@@ -82,6 +87,9 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNiwi
 
 ###
 GET http://localhost:3000/recetas?page=2
+
+###
+GET http://localhost:3000/recetas/pan
 
 ###
 POST http://localhost:3000/recetas/create
