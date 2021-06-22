@@ -30,7 +30,7 @@ app.use(express.static(path.join(__dirname, "public")));
 router.get("/", async (req, res) => {
   try {
     const limit = req.query.limit || 6;
-    const page = req.query.page || 1;
+    const page = req.query.page || 10;
 
     const recetas = await getAll(parseInt(limit), parseInt(page));
     res.json(recetas);
