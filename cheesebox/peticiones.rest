@@ -86,7 +86,7 @@ GET http://localhost:3000/usuarios/test
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjoyNiwiZW1haWwiOiJtYXBvNjlAZ21haWwuY29tIn0sImNhZHVjaWRhZCI6MTYyMzk3MDUzNywiaWF0IjoxNjIzOTcwMTE3fQ.E9zXbRtdXIN3dkqLJ3ge61DEYecAiN4S9aEenp_yJR
 
 ###
-GET http://localhost:3000/recetas
+GET http://localhost:3000/recetas?page=2
 
 ###
 GET http://localhost:3000/recetas/pan
