@@ -9,24 +9,10 @@ const {
   getByItem
 } = require("../models/receta.models");
 
-const path = require('path');
+
 const fs = require('fs')
 const multer = require('multer');
 const upload = multer({ dest: 'public/images/productos/' });
-const app = express();
-
-app.use(express.json);
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, "public")));
-
-// router.get("/", async (req, res) => {
-//   try {
-//     const recetas = await getAll();
-//     res.json(recetas);
-//   } catch (error) {
-//     console.error("Sigue buscando");
-//   }
-// });
 
 router.get("/", async (req, res) => {
   try {
@@ -41,7 +27,7 @@ router.get("/", async (req, res) => {
 });
 
 
-router.get("/:recetas", async (req, res) => {
+router.get("/search/:recetas", async (req, res) => {
   try {
     const recetas = await getByItem(req.params.recetas);
     if (recetas) {
@@ -56,6 +42,18 @@ router.get("/:recetas", async (req, res) => {
   }
 });
 
+router.get("/:recetaId", async (req, res) => {
+  try {
+    const receta = await getById(req.params.recetaId);
+    if (receta) {
+      res.json(receta);
+    } else {
+      res.json({ message: "El id no existe" });
+    }
+  } catch (error) {
+    res.json({ error: "no funciona" });
+  }
+});
 router.post('/create', upload.single('imagen'), async (req, res) => {
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
@@ -69,18 +67,6 @@ router.post('/create', upload.single('imagen'), async (req, res) => {
     res.json(result);
   } catch (error) {
     console.log(error);
-  }
-});
-router.get("/:recetaId", async (req, res) => {
-  try {
-    const receta = await getById(req.params.recetaId);
-    if (receta) {
-      res.json(receta);
-    } else {
-      res.json({ message: "El id no existe" });
-    }
-  } catch (error) {
-    res.json({ error: "no funciona" });
   }
 });
 

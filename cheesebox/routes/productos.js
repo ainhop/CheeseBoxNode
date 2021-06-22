@@ -14,8 +14,7 @@ app.use(express.static(path.join(__dirname, "public")));
 router.get("/", async (req, res) => {
   try {
     const limit = req.query.limit || 6;
-    const page = req.query.page || 1;
-
+    const page = req.query.page || 10;
     const productos = await getAll(parseInt(limit), parseInt(page));
     res.json(productos);
   } catch (error) {
@@ -23,7 +22,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/:producto", async (req, res) => {
+router.get("/search/:producto", async (req, res) => {
   try {
     const producto = await getByItem(req.params.producto);
     if (producto) {
