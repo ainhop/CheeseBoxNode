@@ -6,7 +6,7 @@ const {
   getById,
   update,
   deleteById,
-  getByItem
+  getByItem,
 } = require("../models/receta.models");
 
 
@@ -31,14 +31,12 @@ router.get("/search/:recetas", async (req, res) => {
   try {
     const recetas = await getByItem(req.params.recetas);
     if (recetas) {
-      res.json(recetas)
- 
+      res.json(recetas);
     } else {
-      ('este queso no está')
+      ("este queso no está");
     }
-  }
-  catch(error) {
-    res.json('Ups algo no fue bien')
+  } catch (error) {
+    res.json("Ups algo no fue bien");
   }
 });
 
