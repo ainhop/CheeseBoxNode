@@ -77,9 +77,6 @@ router.put("/update/:productosId", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
- catch (error) {
-  console.log(error)
-  }
 })
 
 module.exports = router;

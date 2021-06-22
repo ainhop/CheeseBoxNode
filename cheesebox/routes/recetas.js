@@ -9,6 +9,12 @@ const {
   getByItem
 } = require("../models/receta.models");
 
+const path = require('path');
+const fs = require('fs')
+const multer = require('multer');
+const upload = multer({ dest: 'public/images/productos/' });
+const app = express();
+
 app.use(express.json);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
