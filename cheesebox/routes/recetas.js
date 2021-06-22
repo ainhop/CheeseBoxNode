@@ -9,16 +9,34 @@ const {
   getByItem
 } = require("../models/receta.models");
 
+const path = require('path');
+const fs = require('fs')
+const multer = require('multer');
+const upload = multer({ dest: 'public/images/productos/' });
+const app = express();
+
 app.use(express.json);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
+// router.get("/", async (req, res) => {
+//   try {
+//     const recetas = await getAll();
+//     res.json(recetas);
+//   } catch (error) {
+//     console.error("Sigue buscando");
+//   }
+// });
+
 router.get("/", async (req, res) => {
   try {
-    const recetas = await getAll();
+    const limit = req.query.limit || 6;
+    const page = req.query.page || 10;
+
+    const recetas = await getAll(parseInt(limit), parseInt(page));
     res.json(recetas);
   } catch (error) {
-    console.error("Sigue buscando");
+    res.json({ error: "búsqueda incorrecta" });
   }
 });
 

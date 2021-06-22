@@ -13,10 +13,13 @@ app.use(express.static(path.join(__dirname, "public")));
 
 router.get("/", async (req, res) => {
   try {
-    const productos = await getAll();
+    const limit = req.query.limit || 6;
+    const page = req.query.page || 1;
+
+    const productos = await getAll(parseInt(limit), parseInt(page));
     res.json(productos);
   } catch (error) {
-    console.error("Sigue buscando");
+    res.json({ error: "búsqueda incorrecta" });
   }
 });
 
@@ -73,9 +76,6 @@ router.put("/update/:productosId", async (req, res) => {
     res.json(result);
   } catch (error) {
     console.log(error);
-  }
- catch (error) {
-  console.log(error)
   }
 })
 
