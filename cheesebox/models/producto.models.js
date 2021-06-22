@@ -34,10 +34,11 @@ const create = ({
   color,
   tipo,
   imagen,
+  fk_usuario
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "insert into productos (nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo, imagen) values (?, ?, ?, ?, ?, ?, ?, ?)",
+      "insert into productos (nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo, imagen, fk_usuario) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
       [
         nombre,
         descripcion,
@@ -47,6 +48,7 @@ const create = ({
         color,
         tipo,
         imagen,
+        fk_usuario
       ],
       (err, result) => {
         if (err) reject(err);

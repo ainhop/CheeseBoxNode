@@ -7,6 +7,7 @@ GET http://localhost:3000/productos/vaca
 ###
 POST http://localhost:3000/productos/create
 Content-Type: application/json
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjo0MywiZW1haWwiOiJkYXZpZEBob3RtYWlsLmNvbSJ9LCJjYWR1Y2lkYWQiOjE2MjQzNzY0OTMsImlhdCI6MTYyNDM3NjA3M30.1MuHkhxVYvBbXPLXjLDW5aq6WJBFgGEkTfdbNoz0HYE
 
 {
   "nombre": "Mozarrella",
@@ -54,7 +55,7 @@ Content-Type: application/json
   "nombre": "Marianico",
   "apellidos": "Portón",
   "username": "MaPo",
-  "email": "mapo69@gmail.com",
+  "email": "mapo692@gmail.com",
   "password": "1234"
 }
 
@@ -77,8 +78,8 @@ POST http://localhost:3000/usuarios/login
 Content-Type: application/json
 
 {
-  "email": "mapo69@gmail.com", 
-  "password": "1234"
+  "email": "david@hotmail.com", 
+  "password": "1234ABCDa@"
 }
 
 ###

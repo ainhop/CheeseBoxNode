@@ -12,9 +12,9 @@ const checkToken = async (req, res, next) => {
   const token = req.headers["authorization"];
   console.log(req.headers);
   //   es correcto
-
+  let obj 
   try {
-    jwt.verify(token, "un string");
+    obj = jwt.verify(token, "un string");
   } catch (error) {
     console.log(error);
     return res.json({ error: "token incorrecto" });
@@ -26,7 +26,7 @@ const checkToken = async (req, res, next) => {
     return resj.json({ error: "token caducado" });
   }
   //   recuperar usuario
-  const usuario = await getById(obj.usuario_id);
+  const usuario = await getById(obj.usuario.id);
   req.user = usuario;
 
   next();
