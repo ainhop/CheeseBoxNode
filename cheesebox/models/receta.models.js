@@ -1,15 +1,5 @@
 // Métodos para acceder a la base de datos de la tabla recetas
 
-// obtener todas las recetas
-// const getAll = () => {
-//   return new Promise((resolve, reject) => {
-//     db.query("select * from recetas", (err, rows) => {
-//       if (err) reject(err);
-//       resolve(rows);
-//     });
-//   });
-// };
-
 // obtener todas las recetas. limitado por páginas
 const getAll = (limit, page) => {
   return new Promise((resolve, reject) => {
@@ -53,17 +43,54 @@ const create = ({
   });
 };
 
+// crear receta favorita
+const createFav = (fk_usuario, fk_recetas) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "INSERT INTO tbi_usuarios_recetas (fk_usuarios, fk_recetas) values (?, ?)",
+      [fk_usuario, fk_recetas],
+      (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      }
+    );
+  });
+};
+
+// obtener recetas favoritas
+const getFav = (pRecetaId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "SELECT * FROM recetas as r, tbi_usuarios_recetas as tbi WHERE tbi.fk_usuarios = ? AND tbi.fk_recetas = r.id",
+      [pRecetaId],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      }
+    );
+  });
+};
+
 const getByItem = (pValor) => {
+<<<<<<< HEAD
+  console.log(pValor);
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM cheesebox.productos WHERE nombre LIKE '%${pValor}%' or descripcion LIKE '%${pValor}%'`,
+      (err, result) => {
+=======
   console.log(pValor)
     return new Promise((resolve, reject) => {
   
       db.query(`SELECT * FROM cheesebox.recetas WHERE nombre LIKE '%${pValor}%' or ingredientes LIKE '%${pValor}%' or elaboracion LIKE '%${pValor}%';`, (err, result) => {
+>>>>>>> develop
         if (err) reject(result);
         resolve(result);
-      });
-    })
+      }
+    );
+  });
 };
-  
+
 const getById = (pId) => {
   return new Promise((resolve, reject) => {
     db.query("select * from recetas where id = ?", [pId], (err, rows) => {
@@ -116,11 +143,26 @@ const deleteById = (pRecetaId) => {
   });
 };
 
+const deleteFav = (pRecetaId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "delete from tbi_usuarios_recetas where id.fk_recetas = ?",
+      [pRecetaId],
+      (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      }
+    );
+  });
+};
+
 module.exports = {
   getAll,
   create,
   getById,
   update,
   deleteById,
-  getByItem
+  getByItem,
+  createFav,
+  getFav,
 };
