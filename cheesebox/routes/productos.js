@@ -7,6 +7,8 @@ const {
   update,
   deleteById,
   getByItem,
+  getFav,
+  createFav,
 } = require("../models/producto.models");
 const path = require("path");
 const fs = require("fs");
@@ -39,25 +41,32 @@ router.get("/search/:producto", async (req, res) => {
       ("este queso no está");
     }
   } catch (error) {
-    res.json("Ups algo no fue bien");
+    res.json("algo salió mal");
   }
 });
-router.post("/create", checkToken, upload.single("imagen"), async (req, res) => {
-  console.log(req.user)
-  try {
-    const extension = "." + req.file.mimetype.split("/")[1];
-    const newName =
-      "http://localhost:3000/images/productos/" + req.file.filename + extension;
-    const newPath = req.file.path + extension;
-    fs.renameSync(req.file.path, newPath);
-    req.body.imagen = newName;
-    req.body.fk_usuario = req.user.id;
-    const result = await create(req.body);
-    res.json(result);
-  } catch (error) {
-    console.log(error);
+router.post(
+  "/create",
+  checkToken,
+  upload.single("imagen"),
+  async (req, res) => {
+    console.log(req.user);
+    try {
+      const extension = "." + req.file.mimetype.split("/")[1];
+      const newName =
+        "http://localhost:3000/images/productos/" +
+        req.file.filename +
+        extension;
+      const newPath = req.file.path + extension;
+      fs.renameSync(req.file.path, newPath);
+      req.body.imagen = newName;
+      req.body.fk_usuario = req.user.id;
+      const result = await create(req.body);
+      res.json(result);
+    } catch (error) {
+      console.log(error);
+    }
   }
-});
+);
 
 router.get("/:productoId", async (req, res) => {
   try {
@@ -65,10 +74,10 @@ router.get("/:productoId", async (req, res) => {
     if (producto) {
       res.json(producto);
     } else {
-      ("este ID es mentira");
+      ("este ID no existe");
     }
   } catch (error) {
-    res.json("Error mu chungo");
+    res.json("error");
   }
 });
 
@@ -84,9 +93,23 @@ router.put("/update/:productosId", async (req, res) => {
   } catch (error) {
     console.log(error);
   }
-})
+});
 
+router.get("/fav/all", checkToken, async (req, res) => {
+  try {
+    const result = await getFav(req.user.id);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/fav/:productosId", checkToken, async (req, res) => {
+  try {
+    const result = await createFav(req.user.id, req.params.productosId);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
 module.exports = router;
-// app.listen(3300, () => {
-//   console.log('El servidor esta escuchando en el puerto 3000')
-// } )

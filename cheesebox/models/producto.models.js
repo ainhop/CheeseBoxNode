@@ -1,14 +1,5 @@
 // Métodos para acceder a la base de datos de productos
 
-// const getAll = () => {
-//   return new Promise((resolve, reject) => {
-//     db.query("select * from productos", (err, rows) => {
-//       if (err) reject(err);
-//       resolve(rows);
-//     });
-//   });
-// };
-
 // obtener todos los productos. limitado por páginas
 
 const getAll = (limit, page) => {
@@ -34,7 +25,7 @@ const create = ({
   color,
   tipo,
   imagen,
-  fk_usuario
+  fk_usuario,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -48,11 +39,39 @@ const create = ({
         color,
         tipo,
         imagen,
-        fk_usuario
+        fk_usuario,
       ],
       (err, result) => {
         if (err) reject(err);
         resolve(result);
+      }
+    );
+  });
+};
+
+// crear receta favorita
+const createFav = (fk_usuario, fk_productos) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "INSERT INTO tbi_usuarios_productos (fk_usuarios, fk_productos) values (?, ?)",
+      [fk_usuario, fk_productos],
+      (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      }
+    );
+  });
+};
+
+// obtener recetas favoritas
+const getFav = (pProductoId) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "SELECT * FROM productos as p, tbi_usuarios_productos as tbi WHERE tbi.fk_usuarios = ? AND tbi.fk_productos = r.id",
+      [pProductoId],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
       }
     );
   });
@@ -113,15 +132,25 @@ const update = (
   });
 };
 
-
 const getByItem = (pValor) => {
-  console.log(pValor)
-    return new Promise((resolve, reject) => {
-  
-      db.query(`SELECT * FROM cheesebox.productos WHERE nombre LIKE '%${pValor}%' or descripcion LIKE '%${pValor}%'`, (err, result) => {
-        if (err) reject(result);
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM cheesebox.productos WHERE nombre LIKE '%${pValor}%' or descripcion LIKE '%${pValor}%'`,
+      (err, result) => {
+        if (err) reject(err);
         resolve(result);
-      });
-    })
-  };
-module.exports = { getAll, create, getById, deleteById, update, getByItem };
+      }
+    );
+  });
+};
+
+module.exports = {
+  getAll,
+  create,
+  getById,
+  deleteById,
+  update,
+  getByItem,
+  createFav,
+  getFav,
+};

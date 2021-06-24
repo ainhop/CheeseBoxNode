@@ -1,6 +1,6 @@
 var express = require("express");
 var router = express.Router();
-const {body, validationResult} = require("express-validator")
+const { body, validationResult } = require("express-validator");
 const bcrypt = require("bcryptjs");
 const dayjs = require("dayjs");
 const jwt = require("jsonwebtoken");
@@ -43,7 +43,7 @@ router.post("/create", upload.single("imagen"), async (req, res) => {
     const newPath = req.file.path + extension;
     fs.renameSync(req.file.path, newPath);
     req.body.imagen = newName;
-    console.log(req)
+    console.log(req);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: erros.array() });

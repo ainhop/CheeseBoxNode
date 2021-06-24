@@ -19,6 +19,15 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjo0Mywi
   "tipo": "Mozarrella",
   "imagen": "Fotosubida"
 }
+###
+
+GET http://localhost:3000/productos/fav/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDUyNDA3MSwiaWF0IjoxNjI0NTIzNjUxfQ.ubyaGB_2XB-ebGkIYJ2a0-Gx6fyT__mh_e7L1HC66ow
+
+###
+
+GET http://localhost:3000/productos/fav/3
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDU0NjUyNiwiaWF0IjoxNjI0NTQ2MTA2fQ.6R5TN8BvLL1yC0_5koAlBGen2aqsQ2Z1oRoEcSj6SlI
 
 
 ###
@@ -78,8 +87,8 @@ POST http://localhost:3000/usuarios/login
 Content-Type: application/json
 
 {
-  "email": "david@hotmail.com", 
-  "password": "1234ABCDa@"
+  "email": "jlo@jlo.com", 
+  "password": "getLoud8@"
 }
 
 ###
@@ -110,6 +119,10 @@ Content-Type: application/json
 GET http://localhost:3000/recetas/1
 
 ###
+GET http://localhost:3000/recetas/fav/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDUyODMwOCwiaWF0IjoxNjI0NTI3ODg4fQ.RlPsSzA4d-jv5Amz4hk2acWC6-OzU47GrJ6C1RBLuEI
+
+###
 PUT http://localhost:3000/recetas/update/42
 Content-Type: application/json
 
@@ -124,3 +137,12 @@ Content-Type: application/json
 
 ###
 DELETE http://localhost:3000/recetas/delete/41
+
+
+###
+GET http://localhost:3000/recetas/fav/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDUyNDA3MSwiaWF0IjoxNjI0NTIzNjUxfQ.ubyaGB_2XB-ebGkIYJ2a0-Gx6fyT__mh_e7L1HC66ow
+
+###
+GET http://localhost:3000/recetas/fav/3
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDU0NjUyNiwiaWF0IjoxNjI0NTQ2MTA2fQ.6R5TN8BvLL1yC0_5koAlBGen2aqsQ2Z1oRoEcSj6SlI

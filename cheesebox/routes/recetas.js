@@ -7,12 +7,15 @@ const {
   update,
   deleteById,
   getByItem,
+  getFav,
+  createFav,
+  deleteFav,
 } = require("../models/receta.models");
 
-
-const fs = require('fs')
-const multer = require('multer');
-const upload = multer({ dest: 'public/images/productos/' });
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: "public/images/productos/" });
+const { checkToken } = require("../middlewares/middleware");
 
 router.get("/", async (req, res) => {
   try {
@@ -25,7 +28,6 @@ router.get("/", async (req, res) => {
     res.json({ error: "búsqueda incorrecta" });
   }
 });
-
 
 router.get("/search/:recetas", async (req, res) => {
   try {
@@ -52,7 +54,7 @@ router.get("/:recetaId", async (req, res) => {
     res.json({ error: "no funciona" });
   }
 });
-router.post('/create', upload.single('imagen'), async (req, res) => {
+router.post("/create", upload.single("imagen"), async (req, res) => {
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
     const newName =
@@ -78,6 +80,29 @@ router.put("/update/:recetasId", async (req, res) => {
 });
 
 router.delete("/delete/:recetasId", async (req, res) => {
+  const result = await deleteById(req.params.recetasId);
+  res.json(result);
+});
+
+router.get("/fav/all", checkToken, async (req, res) => {
+  try {
+    const result = await getFav(req.user.id);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/fav/:recetasId", checkToken, async (req, res) => {
+  try {
+    const result = await createFav(req.user.id, req.params.recetasId);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.delete("/fav/delete/:recetasId", async (req, res) => {
   const result = await deleteById(req.params.recetasId);
   res.json(result);
 });
