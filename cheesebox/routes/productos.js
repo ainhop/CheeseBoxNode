@@ -7,6 +7,7 @@ const {
   update,
   deleteById,
   getByItem,
+  paginator
 } = require("../models/producto.models");
 const path = require("path");
 const fs = require("fs");
@@ -85,6 +86,17 @@ router.put("/update/:productosId", async (req, res) => {
     console.log(error);
   }
 })
+
+router.get('/info/pag', async (req, rest) => {
+  try {
+      const rows = await paginator();
+      console.log(rows);
+      rows.numPaginas = Math.ceil(rows.numPaginas)
+      rest.json(rows);
+  } catch (err) {
+      rest.json(err);
+  };
+});
 
 module.exports = router;
 // app.listen(3300, () => {

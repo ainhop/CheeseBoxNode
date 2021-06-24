@@ -123,5 +123,20 @@ const getByItem = (pValor) => {
         resolve(result);
       });
     })
-  };
-module.exports = { getAll, create, getById, deleteById, update, getByItem };
+};
+  
+
+const paginator = () => {
+  return new Promise((resolve, reject) => {
+      db.query('select count(*) as numProductos, count(*)/6 as numPaginas from productos', (err, rows) => {
+          if (err) reject(err);
+          resolve(rows);
+      });
+  });
+};
+  
+
+
+
+
+module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator };
