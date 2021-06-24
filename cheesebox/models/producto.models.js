@@ -139,23 +139,6 @@ const getByItem = (pValor) => {
       (err, result) => {
         if (err) reject(err);
         resolve(result);
-<<<<<<< HEAD
-      }
-    );
-  });
-};
-
-module.exports = {
-  getAll,
-  create,
-  getById,
-  deleteById,
-  update,
-  getByItem,
-  createFav,
-  getFav,
-};
-=======
       });
     })
 };
@@ -175,4 +158,3 @@ const paginator = () => {
 
 
 module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator };
->>>>>>> develop

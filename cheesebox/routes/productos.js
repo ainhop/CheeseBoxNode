@@ -7,12 +7,7 @@ const {
   update,
   deleteById,
   getByItem,
-<<<<<<< HEAD
-  getFav,
-  createFav,
-=======
-  paginator
->>>>>>> develop
+  
 } = require("../models/producto.models");
 const path = require("path");
 const fs = require("fs");
@@ -108,7 +103,6 @@ router.get("/fav/all", checkToken, async (req, res) => {
   }
 });
 
-<<<<<<< HEAD
 router.get("/fav/:productosId", checkToken, async (req, res) => {
   try {
     const result = await createFav(req.user.id, req.params.productosId);
@@ -117,7 +111,6 @@ router.get("/fav/:productosId", checkToken, async (req, res) => {
     console.log(error);
   }
 });
-=======
 router.get('/info/pag', async (req, rest) => {
   try {
       const rows = await paginator();
@@ -129,5 +122,4 @@ router.get('/info/pag', async (req, rest) => {
   };
 });
 
->>>>>>> develop
 module.exports = router;

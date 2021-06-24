@@ -12,17 +12,10 @@ const {
   deleteFav,
 } = require("../models/receta.models");
 
-<<<<<<< HEAD
-const fs = require("fs");
-const multer = require("multer");
-const upload = multer({ dest: "public/images/productos/" });
 const { checkToken } = require("../middlewares/middleware");
-=======
-
 const fs = require('fs')
 const multer = require('multer');
 const upload = multer({ dest: 'public/images/recetas/' });
->>>>>>> develop
 
 router.get("/", async (req, res) => {
   try {
@@ -62,11 +55,8 @@ router.get("/:recetaId", async (req, res) => {
     res.json({ error: "no funciona" });
   }
 });
-<<<<<<< HEAD
-router.post("/create", upload.single("imagen"), async (req, res) => {
-=======
+// router.post("/create", upload.single("imagen"), async (req, res) => {
 router.post('/create', upload.array('imagen', 4), async (req, res) => {
->>>>>>> develop
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
     const newName =
@@ -116,7 +106,7 @@ router.get("/fav/:recetasId", checkToken, async (req, res) => {
 });
 
 router.delete("/fav/delete/:recetasId", async (req, res) => {
-  const result = await deleteById(req.params.recetasId);
+  const result = await deleteFav(req.params.recetasId);
   res.json(result);
 });
 
