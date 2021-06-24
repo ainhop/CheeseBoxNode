@@ -7,6 +7,8 @@ const {
   update,
   deleteById,
   getByItem,
+  createFav,
+  getFav
   
 } = require("../models/producto.models");
 const path = require("path");

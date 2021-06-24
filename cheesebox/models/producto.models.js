@@ -157,4 +157,4 @@ const paginator = () => {
 
 
 
-module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator };
+module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator, createFav, getFav };
