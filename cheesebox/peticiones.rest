@@ -31,7 +31,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJl
 
 
 ###
-GET http://localhost:3000/productos/11
+GET http://localhost:3000/productos/info/pag
 
 ###
 DELETE http://localhost:3000/productos/delete/42
@@ -116,7 +116,7 @@ Content-Type: application/json
 }
 
 ###
-GET http://localhost:3000/recetas/1
+GET http://localhost:3000/recetas/search/horno
 
 ###
 GET http://localhost:3000/recetas/fav/all

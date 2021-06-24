@@ -139,6 +139,7 @@ const getByItem = (pValor) => {
       (err, result) => {
         if (err) reject(err);
         resolve(result);
+<<<<<<< HEAD
       }
     );
   });
@@ -154,3 +155,24 @@ module.exports = {
   createFav,
   getFav,
 };
+=======
+      });
+    })
+};
+  
+
+const paginator = () => {
+  return new Promise((resolve, reject) => {
+      db.query('select count(*) as numProductos, count(*)/6 as numPaginas from productos', (err, rows) => {
+          if (err) reject(err);
+          resolve(rows);
+      });
+  });
+};
+  
+
+
+
+
+module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator };
+>>>>>>> develop
