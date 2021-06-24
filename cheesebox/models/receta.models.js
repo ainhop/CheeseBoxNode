@@ -57,7 +57,7 @@ const getByItem = (pValor) => {
   console.log(pValor)
     return new Promise((resolve, reject) => {
   
-      db.query(`SELECT * FROM cheesebox.productos WHERE nombre LIKE '%${pValor}%' or descripcion LIKE '%${pValor}%'`, (err, result) => {
+      db.query(`SELECT * FROM cheesebox.recetas WHERE nombre LIKE '%${pValor}%' or ingredientes LIKE '%${pValor}%' or elaboracion LIKE '%${pValor}%';`, (err, result) => {
         if (err) reject(result);
         resolve(result);
       });
