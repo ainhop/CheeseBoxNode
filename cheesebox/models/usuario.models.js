@@ -47,7 +47,6 @@ const update = (
       [nombre, apellidos, username, email, password, pUsuarioId],
       (err, result) => {
         if (err) reject(err);
-        console.log(result);
         resolve(result);
       }
     );

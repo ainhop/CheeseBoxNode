@@ -54,7 +54,8 @@ Content-Type: application/json
 DELETE http://localhost:3000/usuarios/delete/45
 
 ###
-GET http://localhost:3000/usuarios/1
+GET http://localhost:3000/usuarios/perfil
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDYwNTA1OCwiaWF0IjoxNjI0NjA0NjM4fQ.Uax0v-1GSlQnTm6VJnNEbF-vw_TXMrhMjH0gx3AGzes
 
 ### 
 PUT http://localhost:3000/usuarios/update/5

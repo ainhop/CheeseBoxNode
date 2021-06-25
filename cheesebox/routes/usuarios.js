@@ -79,17 +79,10 @@ router.put("/update/:usuarioId", async (req, res) => {
   }
 });
 
-router.get("/:usuarioId", async (req, res) => {
-  try {
-    const usuario = await getById(req.params.usuarioId);
-    if (usuario) {
-      res.json(usuario);
-    } else {
-      ("el id no existe");
-    }
-  } catch (error) {
-    res.json("error");
-  }
+router.get("/perfil", checkToken, async (req, res) => {
+      res.json(req.user);
+   
+
 });
 
 router.delete("/delete/:usuarioId", async (req, res) => {
