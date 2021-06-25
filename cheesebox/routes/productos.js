@@ -8,13 +8,15 @@ const {
   deleteById,
   getByItem,
   createFav,
-  getFav
+  getFav,
+  checkFav,
+  deleteFav
   
 } = require("../models/producto.models");
 const path = require("path");
 const fs = require("fs");
 const multer = require("multer");
-const { checkToken } = require("../middlewares/middleware");
+const { checkToken, checkTokenLight } = require("../middlewares/middleware");
 const upload = multer({ dest: "public/images/productos/" });
 const app = express();
 
@@ -22,12 +24,22 @@ app.use(express.json);
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
-router.get("/", async (req, res) => {
+router.get("/", checkTokenLight, async (req, res) => {
+  console.log(req.user)
   try {
     const limit = req.query.limit || 6;
     const page = req.query.page || 10;
     const productos = await getAll(parseInt(limit), parseInt(page));
-    res.json(productos);
+    if (req.user === null) {
+      res.json(productos);
+    }
+    else {
+      for (let producto of productos) {
+        producto.favorito = await checkFav(req.user.id, producto.id)
+        
+      }
+      res.json(productos);
+    }
   } catch (error) {
     res.json({ error: "búsqueda incorrecta" });
   }
@@ -107,6 +119,10 @@ router.get("/fav/all", checkToken, async (req, res) => {
 
 router.get("/fav/:productosId", checkToken, async (req, res) => {
   try {
+    const check = await checkFav(req.user.id, req.params.productosId);
+    if (check) {
+      return res.json({error : 'Ya se encuentra como favorito'})
+    }
     const result = await createFav(req.user.id, req.params.productosId);
     res.json(result);
   } catch (error) {
@@ -122,6 +138,11 @@ router.get('/info/pag', async (req, rest) => {
   } catch (err) {
       rest.json(err);
   };
+});
+
+router.delete("/fav/delete/:recetasId", async (req, res) => {
+  const result = await deleteFav(req.params.recetasId);
+  res.json(result);
 });
 
 module.exports = router;

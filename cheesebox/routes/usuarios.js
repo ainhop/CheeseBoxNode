@@ -81,8 +81,6 @@ router.put("/update/:usuarioId", async (req, res) => {
 
 router.get("/perfil", checkToken, async (req, res) => {
       res.json(req.user);
-   
-
 });
 
 router.delete("/delete/:usuarioId", async (req, res) => {

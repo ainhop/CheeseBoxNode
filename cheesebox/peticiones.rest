@@ -1,5 +1,6 @@
 
-GET http://localhost:3000/
+GET http://localhost:3000/productos?page=1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDYxNDk5OCwiaWF0IjoxNjI0NjE0NTc4fQ.9pUdA9d2zuV2YLrF2thzesy4mPvs1_FyqYsaNT4KWkA
 
 ###
 GET http://localhost:3000/productos/vaca
@@ -26,7 +27,7 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJl
 
 ###
 
-GET http://localhost:3000/productos/fav/3
+GET http://localhost:3000/productos/fav/5
 Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDU0NjUyNiwiaWF0IjoxNjI0NTQ2MTA2fQ.6R5TN8BvLL1yC0_5koAlBGen2aqsQ2Z1oRoEcSj6SlI
 
 
@@ -34,7 +35,8 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJl
 GET http://localhost:3000/productos/info/pag
 
 ###
-DELETE http://localhost:3000/productos/delete/42
+DELETE http://localhost:3000/productos/fav/delete/1
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDYxNDk5OCwiaWF0IjoxNjI0NjE0NTc4fQ.9pUdA9d2zuV2YLrF2thzesy4mPvs1_FyqYsaNT4KWkA
 
 ###     
 PUT http://localhost:3000/productos/update/33

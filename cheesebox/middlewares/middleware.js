@@ -32,4 +32,37 @@ const checkToken = async (req, res, next) => {
   next();
 };
 
-module.exports = { checkToken };
+const checkTokenLight = async (req, res, next) => {
+  //  está incluido el token en Authentication
+  if (req.headers["Authorization"]) {
+    req.user = null
+    console.log('1')
+    return next();
+  }
+
+  const token = req.headers["authorization"];
+  console.log(req.headers);
+  //   es correcto
+  let obj 
+  try {
+    obj = jwt.verify(token, "un string");
+  } catch (error) {
+    req.user = null
+    console.log('2')
+    return next();
+  }
+
+  //   está caducado
+  const currentDate = dayjs().unix();
+  if (currentDate > obj.fecha) {
+    req.user = null
+    console.log('3')
+    return next();
+  }
+  //   recuperar usuario
+  const usuario = await getById(obj.usuario.id);
+  req.user = usuario;
+
+  next();
+};
+module.exports = { checkToken, checkTokenLight };
