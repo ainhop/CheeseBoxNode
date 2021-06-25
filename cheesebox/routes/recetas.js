@@ -10,24 +10,49 @@ const {
   getFav,
   createFav,
   deleteFav,
+  checkFav,
+  
 } = require("../models/receta.models");
 
-const { checkToken } = require("../middlewares/middleware");
+const { checkToken, checkTokenLight } = require("../middlewares/middleware");
 const fs = require('fs')
 const multer = require('multer');
 const upload = multer({ dest: 'public/images/recetas/' });
 
-router.get("/", async (req, res) => {
+// router.get("/", async (req, res) => {
+//   try {
+//     const limit = req.query.limit || 6;
+//     const page = req.query.page || 10;
+
+//     const recetas = await getAll(parseInt(limit), parseInt(page));
+//     res.json(recetas);
+//   } catch (error) {
+//     res.json({ error: "búsqueda incorrecta" });
+//   }
+// });
+
+
+router.get("/", checkTokenLight, async (req, res) => {
+  console.log(req.user)
   try {
     const limit = req.query.limit || 6;
     const page = req.query.page || 10;
-
     const recetas = await getAll(parseInt(limit), parseInt(page));
-    res.json(recetas);
+    if (req.user === null) {
+      res.json(recetas);
+    }
+    else {
+      for (let receta of recetas) {
+        receta.favorito = await checkFav(req.user.id, receta.id)
+        
+      }
+      res.json(recetas);
+    }
   } catch (error) {
     res.json({ error: "búsqueda incorrecta" });
   }
 });
+
 
 router.get("/search/:recetas", async (req, res) => {
   try {
@@ -98,6 +123,10 @@ router.get("/fav/all", checkToken, async (req, res) => {
 
 router.get("/fav/:recetasId", checkToken, async (req, res) => {
   try {
+    const check = await checkFav(req.user.id, req.params.recetasId);
+    if (check) {
+      return res.json({error : 'Ya se encuentra como favorito'})
+    }
     const result = await createFav(req.user.id, req.params.recetasId);
     res.json(result);
   } catch (error) {

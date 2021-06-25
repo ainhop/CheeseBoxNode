@@ -48,7 +48,7 @@ const checkTokenLight = async (req, res, next) => {
     obj = jwt.verify(token, "un string");
   } catch (error) {
     req.user = null
-    console.log('2')
+
     return next();
   }
 
@@ -56,7 +56,7 @@ const checkTokenLight = async (req, res, next) => {
   const currentDate = dayjs().unix();
   if (currentDate > obj.fecha) {
     req.user = null
-    console.log('3')
+
     return next();
   }
   //   recuperar usuario

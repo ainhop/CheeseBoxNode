@@ -147,6 +147,20 @@ const deleteFav = (pRecetaId) => {
   });
 };
 
+
+const checkFav = (fk_usuario, fk_recetas) => {
+  return new Promise((resolve, reject) => {
+    db.query("select * FROM tbi_usuarios_recetas where fk_usuarios = ? and fk_recetas = ?",
+      [fk_usuario, fk_recetas],
+      (err, rows) => {
+        if (err) reject(err);
+        if (rows.length === 1) resolve(true)
+        resolve(false)
+      })
+  })
+}
+
+
 module.exports = {
   getAll,
   create,
@@ -156,5 +170,6 @@ module.exports = {
   getByItem,
   createFav,
   getFav,
-  deleteFav
+  deleteFav,
+  checkFav
 };
