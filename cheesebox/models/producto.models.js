@@ -23,13 +23,12 @@ const create = ({
   origen,
   curiosidades,
   color,
-  tipo,
   imagen,
   fk_usuario,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "insert into productos (nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo, imagen, fk_usuario) values (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+      "insert into productos (nombre, descripcion, tipoLeche, origen, curiosidades, color, imagen, fk_usuario) values (?, ?, ?, ?, ?, ?, ?, ?)",
       [
         nombre,
         descripcion,
@@ -37,7 +36,6 @@ const create = ({
         origen,
         curiosidades,
         color,
-        tipo,
         imagen,
         fk_usuario,
       ],
@@ -121,11 +119,11 @@ const deleteById = (pProductoId) => {
 // actualizar un producto
 const update = (
   pProductoId,
-  { nombre, descripcion, tipoLeche, origen, curiosidades, color, tipo }
+  { nombre, descripcion, tipoLeche, origen, curiosidades, color }
 ) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "UPDATE productos SET nombre = ?, descripcion = ?, tipoLeche = ?, origen = ?, curiosidades = ?, color = ?, tipo = ? where id = ?",
+      "UPDATE productos SET nombre = ?, descripcion = ?, tipoLeche = ?, origen = ?, curiosidades = ?, color = ? where id = ?",
       [
         nombre,
         descripcion,
@@ -133,7 +131,6 @@ const update = (
         origen,
         curiosidades,
         color,
-        tipo,
         pProductoId,
       ],
       (err, result) => {

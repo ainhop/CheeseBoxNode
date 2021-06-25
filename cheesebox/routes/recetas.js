@@ -56,7 +56,7 @@ router.get("/:recetaId", async (req, res) => {
   }
 });
 // router.post("/create", upload.single("imagen"), async (req, res) => {
-router.post('/create', upload.array('imagen', 4), async (req, res) => {
+router.post('/create', upload.single('imagen'), async (req, res) => {
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
     const newName =
