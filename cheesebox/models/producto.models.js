@@ -63,6 +63,18 @@ const createFav = (fk_usuario, fk_productos) => {
   });
 };
 
+const checkFav = (fk_usuario, fk_productos) => {
+  return new Promise((resolve, reject) => {
+    db.query("select * FROM tbi_usuarios_productos where fk_usuarios = ? and fk_productos = ?",
+      [fk_usuario, fk_productos],
+      (err, rows) => {
+        if (err) reject(err);
+        if (rows.length === 1) resolve(true)
+        resolve(false)
+      })
+  })
+}
+
 // obtener recetas favoritas
 const getFav = (pProductoId) => {
   return new Promise((resolve, reject) => {
@@ -153,8 +165,19 @@ const paginator = () => {
   });
 };
   
+const deleteFav = (fk_usuario, fk_productos) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "delete from tbi_usuarios_productos where fk_usuarios = ? and fk_productos = ?",
+      [fk_usuario, fk_productos],
+      (err, result) => {
+        if (err) reject(err);
+        resolve(result);
+      }
+    );
+  });
+};
 
 
 
-
-module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator, createFav, getFav };
+module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator, createFav, getFav, checkFav, deleteFav};

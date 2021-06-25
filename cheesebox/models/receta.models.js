@@ -72,7 +72,6 @@ const getFav = (pRecetaId) => {
 };
 
 const getByItem = (pValor) => {
-  console.log(pValor)
     return new Promise((resolve, reject) => {
   
       db.query(`SELECT * FROM cheesebox.recetas WHERE nombre LIKE '%${pValor}%' or ingredientes LIKE '%${pValor}%' or elaboracion LIKE '%${pValor}%';`, (err, result) => {
