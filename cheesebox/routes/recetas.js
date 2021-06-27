@@ -80,23 +80,30 @@ router.get("/:recetaId", async (req, res) => {
     res.json({ error: "no funciona" });
   }
 });
-// router.post("/create", upload.single("imagen"), async (req, res) => {
-router.post('/create', upload.single('imagen'), async (req, res) => {
-  try {
-    const extension = "." + req.file.mimetype.split("/")[1];
-    const newName =
-      "http://localhost:3000/images/recetas/" + req.file.filename ;
-    const newPath = req.file.path + extension;
-    fs.renameSync(req.file.path, newPath);
-    req.body.imagen = newName;
-    const result = await create(req.body);
-    console.log(result);
-    res.json(req.files);
-  } catch (error) {
-    console.log(error);
-  }
-});
 
+router.post(
+  "/create",
+  checkToken,
+  upload.single("imagen"),
+  async (req, res) => {
+    console.log(req.user);
+    try {
+      const extension = "." + req.file.mimetype.split("/")[1];
+      const newName =
+        "http://localhost:3000/images/recetas/" +
+        req.file.filename +
+        extension;
+      const newPath = req.file.path + extension;
+      fs.renameSync(req.file.path, newPath);
+      req.body.imagen = newName;
+      req.body.fk_usuario = req.user.id;
+      const result = await create(req.body);
+      res.json(result);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
 
 router.put("/update/:recetasId", async (req, res) => {
   try {
@@ -134,9 +141,13 @@ router.get("/fav/:recetasId", checkToken, async (req, res) => {
   }
 });
 
-router.delete("/fav/delete/:recetasId", async (req, res) => {
-  const result = await deleteFav(req.params.recetasId);
-  res.json(result);
+router.delete("/fav/delete/:recetasId", checkToken, async (req, res) => {
+  try {
+    const result = await deleteFav(req.user.id, req.params.recetasId);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;

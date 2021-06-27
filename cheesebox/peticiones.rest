@@ -31,11 +31,13 @@ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJl
 
 
 ###
-GET http://localhost:3000/productos/info/pag
+GET http://localhost:3000/productos/fav/all
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDY5OTY0NSwiaWF0IjoxNjI0Njk5MjI1fQ.zVu-8baWcq0hkoO3wcDfIW7hV3Vwv6In60LLWocSuug
+
 
 ###
-DELETE http://localhost:3000/productos/fav/delete/1
-Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDYxNDk5OCwiaWF0IjoxNjI0NjE0NTc4fQ.9pUdA9d2zuV2YLrF2thzesy4mPvs1_FyqYsaNT4KWkA
+DELETE http://localhost:3000/productos/fav/delete/30
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDcwNDUyNiwiaWF0IjoxNjI0NzA0MTA2fQ.aRPjo_rUEzt3Ln32l6qca6CJcD2LFeTl00hbQ0Gjev8
 
 ###     
 PUT http://localhost:3000/productos/update/33
@@ -52,7 +54,7 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/usuarios/delete/45
+DELETE http://localhost:3000/usuarios/delete/9
 
 ###
 GET http://localhost:3000/usuarios/perfil
@@ -138,8 +140,8 @@ Content-Type: application/json
 }
 
 ###
-DELETE http://localhost:3000/recetas/delete/41
-
+DELETE http://localhost:3000/productos/fav/delete/2
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c3VhcmlvIjp7ImlkIjozLCJlbWFpbCI6Impsb0BqbG8uY29tIn0sImNhZHVjaWRhZCI6MTYyNDcwNDUyNiwiaWF0IjoxNjI0NzA0MTA2fQ.aRPjo_rUEzt3Ln32l6qca6CJcD2LFeTl00hbQ0Gjev8
 
 ###
 GET http://localhost:3000/recetas/fav/all
