@@ -140,9 +140,14 @@ router.get('/info/pag', async (req, rest) => {
   };
 });
 
-router.delete("/fav/delete/:recetasId", async (req, res) => {
-  const result = await deleteFav(req.params.recetasId);
-  res.json(result);
+router.delete("/fav/delete/:productosId", checkToken, async (req, res) => {
+  try {
+    const result = await deleteFav(req.user.id, req.params.productosId);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 module.exports = router;
+

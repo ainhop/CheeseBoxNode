@@ -77,7 +77,7 @@ const checkFav = (fk_usuario, fk_productos) => {
 const getFav = (pProductoId) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "SELECT * FROM productos as p, tbi_usuarios_productos as tbi WHERE tbi.fk_usuarios = ? AND tbi.fk_productos = r.id",
+      "SELECT * FROM productos as p, tbi_usuarios_productos as tbi WHERE tbi.fk_usuarios = ? AND tbi.fk_productos = p.id",
       [pProductoId],
       (err, rows) => {
         if (err) reject(err);
@@ -162,7 +162,7 @@ const paginator = () => {
   });
 };
   
-const deleteFav = (fk_usuario, fk_productos) => {
+const deleteFav = (fk_usuario, fk_productos)  => {
   return new Promise((resolve, reject) => {
     db.query(
       "delete from tbi_usuarios_productos where fk_usuarios = ? and fk_productos = ?",
@@ -174,7 +174,6 @@ const deleteFav = (fk_usuario, fk_productos) => {
     );
   });
 };
-
 
 
 module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator, createFav, getFav, checkFav, deleteFav};

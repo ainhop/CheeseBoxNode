@@ -134,11 +134,11 @@ const deleteById = (pRecetaId) => {
   });
 };
 
-const deleteFav = (pRecetaId) => {
+const deleteFav = (fk_usuario, fk_recetas)  => {
   return new Promise((resolve, reject) => {
     db.query(
-      "delete from tbi_usuarios_recetas where id.fk_recetas = ?",
-      [pRecetaId],
+      "delete from tbi_usuarios_recetas where fk_usuarios = ? and fk_recetas = ?",
+      [fk_usuario, fk_recetas],
       (err, result) => {
         if (err) reject(err);
         resolve(result);
