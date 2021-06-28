@@ -11,6 +11,7 @@ const {
   createFav,
   deleteFav,
   checkFav,
+  showEdit
   
 } = require("../models/receta.models");
 
@@ -127,6 +128,16 @@ router.get("/fav/all", checkToken, async (req, res) => {
     console.log(error);
   }
 });
+router.get('/info/pag', async (req, rest) => {
+  try {
+      const rows = await paginator();
+      console.log(rows);
+      rows.numPaginas = Math.ceil(rows.numPaginas)
+      rest.json(rows);
+  } catch (err) {
+      rest.json(err);
+  };
+});
 
 router.get("/fav/:recetasId", checkToken, async (req, res) => {
   try {
@@ -150,4 +161,18 @@ router.delete("/fav/delete/:recetasId", checkToken, async (req, res) => {
   }
 });
 
+
+router.get("/fav/all", checkToken, async (req, res) => {
+  try {
+    const result = await getFav(req.user.id);
+    res.json(result);
+  } catch (error) {
+    console.log(error);
+  }
+});
+
+router.get("/show/create", checkToken, async (req, res) => {
+  const result = await showEdit(req.user.id);
+  res.json(result);
+});
 module.exports = router;

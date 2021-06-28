@@ -10,7 +10,8 @@ const {
   createFav,
   getFav,
   checkFav,
-  deleteFav
+  deleteFav,
+  showEdit
   
 } = require("../models/producto.models");
 const path = require("path");
@@ -121,7 +122,7 @@ router.get("/fav/:productosId", checkToken, async (req, res) => {
   try {
     const check = await checkFav(req.user.id, req.params.productosId);
     if (check) {
-      return res.json({error : 'Ya se encuentra como favorito'})
+      return res.json({error : 'Este queso ya se encuentra entre tus favoritos'})
     }
     const result = await createFav(req.user.id, req.params.productosId);
     res.json(result);
@@ -141,13 +142,23 @@ router.get('/info/pag', async (req, rest) => {
 });
 
 router.delete("/fav/delete/:productosId", checkToken, async (req, res) => {
+ 
   try {
+    const check = await deleteFav(req.user.id, req.params.productosId);
+    if (check) {
+      return res.json({error : 'Este queso ya no se encuentra entre tus favoritos'})
+    }
     const result = await deleteFav(req.user.id, req.params.productosId);
     res.json(result);
   } catch (error) {
     console.log(error);
   }
+
 });
 
+router.get("/show/create", checkToken, async (req, res) => {
+  const result = await showEdit(req.user.id);
+  res.json(result);
+});
 module.exports = router;
 

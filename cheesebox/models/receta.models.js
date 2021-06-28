@@ -160,6 +160,18 @@ const checkFav = (fk_usuario, fk_recetas) => {
   })
 }
 
+const showEdit = (fk_usuario) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "SELECT * FROM cheesebox.recetas where fk_usuario = ?",
+      [fk_usuario],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      }
+    );
+  });
+};
 
 module.exports = {
   getAll,
@@ -171,5 +183,6 @@ module.exports = {
   createFav,
   getFav,
   deleteFav,
-  checkFav
+  checkFav,
+  showEdit
 };

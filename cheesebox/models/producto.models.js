@@ -174,6 +174,18 @@ const deleteFav = (fk_usuario, fk_productos)  => {
     );
   });
 };
+const showEdit = (fk_usuario) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      "SELECT * FROM cheesebox.productos where fk_usuario = ?",
+      [fk_usuario],
+      (err, rows) => {
+        if (err) reject(err);
+        resolve(rows);
+      }
+    );
+  });
+};
 
 
-module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator, createFav, getFav, checkFav, deleteFav};
+module.exports = { getAll, create, getById, deleteById, update, getByItem, paginator, createFav, getFav, checkFav, deleteFav, showEdit};
