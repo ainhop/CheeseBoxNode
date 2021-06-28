@@ -75,7 +75,7 @@ router.get("/:recetaId", async (req, res) => {
     if (receta) {
       res.json(receta);
     } else {
-      res.json({ message: "El id no existe" });
+      ("este ID no existe");
     }
   } catch (error) {
     res.json({ error: "no funciona" });

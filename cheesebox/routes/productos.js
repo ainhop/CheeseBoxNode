@@ -144,12 +144,8 @@ router.get('/info/pag', async (req, rest) => {
 router.delete("/fav/delete/:productosId", checkToken, async (req, res) => {
  
   try {
-    const check = await deleteFav(req.user.id, req.params.productosId);
-    if (check) {
-      return res.json({error : 'Este queso ya no se encuentra entre tus favoritos'})
-    }
     const result = await deleteFav(req.user.id, req.params.productosId);
-    res.json(result);
+    res.json(result)
   } catch (error) {
     console.log(error);
   }

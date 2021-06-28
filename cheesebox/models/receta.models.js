@@ -84,9 +84,11 @@ const getByItem = (pValor) => {
 
 const getById = (pId) => {
   return new Promise((resolve, reject) => {
-    db.query("select * from recetas where id = ?", [pId], (err, rows) => {
+    db.query("select * from recetas where id = ?",
+      [pId],
+      (err, rows) => {
       if (err) reject(err);
-      if (rows.length !== 1) resolve(null);
+      // if (rows.length !== 1) resolve(null);
       resolve(rows[0]);
     });
   });
