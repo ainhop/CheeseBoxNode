@@ -39,12 +39,12 @@ const deleteById = (pUsuarioId) => {
 };
 const update = (
   pUsuarioId,
-  { nombre, apellidos, username, email, password }
+  { nombre, apellidos, username, email, password, imagen}
 ) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "UPDATE usuarios SET nombre = ?, apellidos = ?, username = ?, email = ?, password = ? where id = ?",
-      [nombre, apellidos, username, email, password, pUsuarioId],
+      "UPDATE usuarios SET nombre = ?, apellidos = ?, username = ?, email = ?, password = ?, imagen = ? where id = ?",
+      [nombre, apellidos, username, email, password, imagen,  pUsuarioId],
       (err, result) => {
         if (err) reject(err);
         resolve(result);
