@@ -115,6 +115,7 @@ router.put("/update/:recetasId", async (req, res) => {
   }
 });
 
+
 router.delete("/delete/:recetasId", async (req, res) => {
   const result = await deleteById(req.params.recetasId);
   res.json(result);
