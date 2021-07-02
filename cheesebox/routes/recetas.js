@@ -20,19 +20,6 @@ const fs = require('fs')
 const multer = require('multer');
 const upload = multer({ dest: 'public/images/recetas/' });
 
-// router.get("/", async (req, res) => {
-//   try {
-//     const limit = req.query.limit || 6;
-//     const page = req.query.page || 10;
-
-//     const recetas = await getAll(parseInt(limit), parseInt(page));
-//     res.json(recetas);
-//   } catch (error) {
-//     res.json({ error: "búsqueda incorrecta" });
-//   }
-// });
-
-
 router.get("/", checkTokenLight, async (req, res) => {
   console.log(req.user)
   try {

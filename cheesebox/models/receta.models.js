@@ -105,7 +105,8 @@ const update = (
     tiempo,
     raciones,
     elaboracion,
-    imagen,
+    imagen
+    
   }
 ) => {
   return new Promise((resolve, reject) => {

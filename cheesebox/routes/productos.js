@@ -145,7 +145,7 @@ router.delete("/fav/delete/:productosId", checkToken, async (req, res) => {
  
   try {
     const result = await deleteFav(req.user.id, req.params.productosId);
-    res.json(result)
+   res.json(result)
   } catch (error) {
     console.log(error);
   }
