@@ -9,7 +9,6 @@ const getAll = (limit, page) => {
       [limit * (page - 1), limit],
       (err, rows) => {
         if (err) reject(err);
-        console.log(rows);
         resolve(rows);
       }
     );

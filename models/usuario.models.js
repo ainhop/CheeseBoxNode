@@ -59,7 +59,6 @@ const getByEmail = (pEmail) => {
       "select * from usuarios where email = ?",
       [pEmail],
       (err, rows) => {
-        console.log(rows);
         if (err) reject(err);
 
         if (rows.length === 0) resolve(null);

@@ -11,28 +11,25 @@ const {
   createFav,
   deleteFav,
   checkFav,
-  showEdit
-  
+  showEdit,
 } = require("../models/receta.models");
 
 const { checkToken, checkTokenLight } = require("../middlewares/middleware");
-const fs = require('fs')
-const multer = require('multer');
-const upload = multer({ dest: 'public/images/recetas/' });
+const fs = require("fs");
+const multer = require("multer");
+const upload = multer({ dest: "public/images/recetas/" });
 
 router.get("/", checkTokenLight, async (req, res) => {
-  console.log(req.user)
+  console.log(req.user);
   try {
     const limit = req.query.limit || 6;
     const page = req.query.page || 10;
     const recetas = await getAll(parseInt(limit), parseInt(page));
     if (req.user === null) {
       res.json(recetas);
-    }
-    else {
+    } else {
       for (let receta of recetas) {
-        receta.favorito = await checkFav(req.user.id, receta.id)
-        
+        receta.favorito = await checkFav(req.user.id, receta.id);
       }
       res.json(recetas);
     }
@@ -41,11 +38,10 @@ router.get("/", checkTokenLight, async (req, res) => {
   }
 });
 
-
 router.get("/search/:recetas", async (req, res) => {
   try {
     const recetas = await getByItem(req.params.recetas);
-    console.log(recetas)
+    console.log(recetas);
     if (recetas) {
       res.json(recetas);
     } else {
@@ -78,7 +74,8 @@ router.post(
     try {
       const extension = "." + req.file.mimetype.split("/")[1];
       const newName =
-        "http://localhost:3000/images/recetas/" +
+        process.env.BASE_URL +
+        "/images/recetas/" +
         req.file.filename +
         extension;
       const newPath = req.file.path + extension;
@@ -102,7 +99,6 @@ router.put("/update/:recetasId", async (req, res) => {
   }
 });
 
-
 router.delete("/delete/:recetasId", async (req, res) => {
   const result = await deleteById(req.params.recetasId);
   res.json(result);
@@ -116,22 +112,21 @@ router.get("/fav/all", checkToken, async (req, res) => {
     console.log(error);
   }
 });
-router.get('/info/pag', async (req, rest) => {
+router.get("/info/pag", async (req, rest) => {
   try {
-      const rows = await paginator();
-      console.log(rows);
-      rows.numPaginas = Math.ceil(rows.numPaginas)
-      rest.json(rows);
+    const rows = await paginator();
+    rows.numPaginas = Math.ceil(rows.numPaginas);
+    rest.json(rows);
   } catch (err) {
-      rest.json(err);
-  };
+    rest.json(err);
+  }
 });
 
 router.get("/fav/:recetasId", checkToken, async (req, res) => {
   try {
     const check = await checkFav(req.user.id, req.params.recetasId);
     if (check) {
-      return res.json({error : 'Ya se encuentra como favorito'})
+      return res.json({ error: "Ya se encuentra como favorito" });
     }
     const result = await createFav(req.user.id, req.params.recetasId);
     res.json(result);
@@ -148,7 +143,6 @@ router.delete("/fav/delete/:recetasId", checkToken, async (req, res) => {
     console.log(error);
   }
 });
-
 
 router.get("/fav/all", checkToken, async (req, res) => {
   try {
