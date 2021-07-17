@@ -49,7 +49,7 @@ router.get("/search/:producto", async (req, res) => {
     if (producto) {
       res.json(producto);
     } else {
-      ("este queso no está");
+      res.json("este queso no está");
     }
   } catch (error) {
     res.json("algo salió mal");
@@ -86,7 +86,7 @@ router.get("/:productoId", async (req, res) => {
     if (producto) {
       res.json(producto);
     } else {
-      ("este ID no existe");
+      res.json("este ID no existe");
     }
   } catch (error) {
     res.json("error");
