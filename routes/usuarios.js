@@ -39,11 +39,13 @@ router.post("/create", upload.single("imagen"), async (req, res) => {
   try {
     const extension = "." + req.file.mimetype.split("/")[1];
     const newName =
-      "http://localhost:3000/images/usuarios/" + req.file.filename + extension;
+      process.env.BASE_URL +
+      "/images/usuarios/" +
+      req.file.filename +
+      extension;
     const newPath = req.file.path + extension;
     fs.renameSync(req.file.path, newPath);
     req.body.imagen = newName;
-    console.log(req);
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
       return res.status(400).json({ errors: erros.array() });
@@ -80,7 +82,7 @@ router.put("/update/:usuarioId", async (req, res) => {
 });
 
 router.get("/perfil", checkToken, async (req, res) => {
-      res.json(req.user);
+  res.json(req.user);
 });
 
 router.delete("/delete/:usuarioId", async (req, res) => {

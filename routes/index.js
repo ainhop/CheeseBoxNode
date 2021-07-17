@@ -1,10 +1,14 @@
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-const { getByItem } = require('../models/index.models');
+const { getByItem } = require("../models/index.models");
 
 /* GET users listing. */
-router.get('/', function(req, res, next) {
-  res.send('');
+router.get("/", function (req, res, next) {
+  res.send("");
+});
+
+router.get("/ping", function (req, res, next) {
+  res.send("pong");
 });
 
 // router.get("/:producto", async (req, res) => {
@@ -12,7 +16,7 @@ router.get('/', function(req, res, next) {
 //     const producto = await getByItem(req.params.producto);
 //     if (producto) {
 //       res.json(producto)
- 
+
 //     } else {
 //       ('este queso no está')
 //     }

@@ -11,8 +11,7 @@ const {
   getFav,
   checkFav,
   deleteFav,
-  showEdit
-  
+  showEdit,
 } = require("../models/producto.models");
 const path = require("path");
 const fs = require("fs");
@@ -26,18 +25,16 @@ app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, "public")));
 
 router.get("/", checkTokenLight, async (req, res) => {
-  console.log(req.user)
+  console.log(req.user);
   try {
     const limit = req.query.limit || 6;
     const page = req.query.page || 10;
     const productos = await getAll(parseInt(limit), parseInt(page));
     if (req.user === null) {
       res.json(productos);
-    }
-    else {
+    } else {
       for (let producto of productos) {
-        producto.favorito = await checkFav(req.user.id, producto.id)
-        
+        producto.favorito = await checkFav(req.user.id, producto.id);
       }
       res.json(productos);
     }
@@ -67,7 +64,8 @@ router.post(
     try {
       const extension = "." + req.file.mimetype.split("/")[1];
       const newName =
-        "http://localhost:3000/images/productos/" +
+        process.env.BASE_URL +
+        "/images/productos/" +
         req.file.filename +
         extension;
       const newPath = req.file.path + extension;
@@ -122,7 +120,9 @@ router.get("/fav/:productosId", checkToken, async (req, res) => {
   try {
     const check = await checkFav(req.user.id, req.params.productosId);
     if (check) {
-      return res.json({error : 'Este queso ya se encuentra entre tus favoritos'})
+      return res.json({
+        error: "Este queso ya se encuentra entre tus favoritos",
+      });
     }
     const result = await createFav(req.user.id, req.params.productosId);
     res.json(result);
@@ -130,26 +130,24 @@ router.get("/fav/:productosId", checkToken, async (req, res) => {
     console.log(error);
   }
 });
-router.get('/info/pag', async (req, rest) => {
+router.get("/info/pag", async (req, rest) => {
   try {
-      const rows = await paginator();
-      console.log(rows);
-      rows.numPaginas = Math.ceil(rows.numPaginas)
-      rest.json(rows);
+    const rows = await paginator();
+    console.log(rows);
+    rows.numPaginas = Math.ceil(rows.numPaginas);
+    rest.json(rows);
   } catch (err) {
-      rest.json(err);
-  };
+    rest.json(err);
+  }
 });
 
 router.delete("/fav/delete/:productosId", checkToken, async (req, res) => {
- 
   try {
     const result = await deleteFav(req.user.id, req.params.productosId);
-   res.json(result)
+    res.json(result);
   } catch (error) {
     console.log(error);
   }
-
 });
 
 router.get("/show/create", checkToken, async (req, res) => {
@@ -157,4 +155,3 @@ router.get("/show/create", checkToken, async (req, res) => {
   res.json(result);
 });
 module.exports = router;
-
