@@ -146,7 +146,7 @@ const update = (
 const getByItem = (pValor) => {
   return new Promise((resolve, reject) => {
     db.query(
-      `SELECT * FROM cheesebox.productos WHERE nombre LIKE '%${pValor}%' or descripcion LIKE '%${pValor}%'`,
+      `SELECT * FROM productos WHERE nombre LIKE '%${pValor}%' or descripcion LIKE '%${pValor}%'`,
       (err, result) => {
         if (err) reject(err);
         resolve(result);
@@ -182,7 +182,7 @@ const deleteFav = (fk_usuario, fk_productos) => {
 const showEdit = (fk_usuario) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "SELECT * FROM cheesebox.productos where fk_usuario = ?",
+      "SELECT * FROM productos where fk_usuario = ?",
       [fk_usuario],
       (err, rows) => {
         if (err) reject(err);

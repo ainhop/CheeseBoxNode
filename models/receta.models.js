@@ -22,7 +22,7 @@ const create = ({
   ingredientes,
   elaboracion,
   imagen,
-  fk_usuario
+  fk_usuario,
 }) => {
   return new Promise((resolve, reject) => {
     db.query(
@@ -35,7 +35,7 @@ const create = ({
         ingredientes,
         elaboracion,
         imagen,
-        fk_usuario
+        fk_usuario,
       ],
       (err, result) => {
         if (err) reject(err);
@@ -74,9 +74,10 @@ const getFav = (pRecetaId) => {
 };
 
 const getByItem = (pValor) => {
-    return new Promise((resolve, reject) => {
-  
-      db.query(`SELECT * FROM cheesebox.recetas WHERE nombre LIKE '%${pValor}%' or ingredientes LIKE '%${pValor}%' or elaboracion LIKE '%${pValor}%';`, (err, result) => {
+  return new Promise((resolve, reject) => {
+    db.query(
+      `SELECT * FROM recetas WHERE nombre LIKE '%${pValor}%' or ingredientes LIKE '%${pValor}%' or elaboracion LIKE '%${pValor}%';`,
+      (err, result) => {
         if (err) reject(result);
         resolve(result);
       }
@@ -86,9 +87,7 @@ const getByItem = (pValor) => {
 
 const getById = (pId) => {
   return new Promise((resolve, reject) => {
-    db.query("select * from recetas where id = ?",
-      [pId],
-      (err, rows) => {
+    db.query("select * from recetas where id = ?", [pId], (err, rows) => {
       if (err) reject(err);
       // if (rows.length !== 1) resolve(null);
       resolve(rows[0]);
@@ -105,8 +104,7 @@ const update = (
     tiempo,
     raciones,
     elaboracion,
-    imagen
-    
+    imagen,
   }
 ) => {
   return new Promise((resolve, reject) => {
@@ -139,7 +137,7 @@ const deleteById = (pRecetaId) => {
   });
 };
 
-const deleteFav = (fk_usuario, fk_recetas)  => {
+const deleteFav = (fk_usuario, fk_recetas) => {
   return new Promise((resolve, reject) => {
     db.query(
       "delete from tbi_usuarios_recetas where fk_usuarios = ? and fk_recetas = ?",
@@ -152,23 +150,24 @@ const deleteFav = (fk_usuario, fk_recetas)  => {
   });
 };
 
-
 const checkFav = (fk_usuario, fk_recetas) => {
   return new Promise((resolve, reject) => {
-    db.query("select * FROM tbi_usuarios_recetas where fk_usuarios = ? and fk_recetas = ?",
+    db.query(
+      "select * FROM tbi_usuarios_recetas where fk_usuarios = ? and fk_recetas = ?",
       [fk_usuario, fk_recetas],
       (err, rows) => {
         if (err) reject(err);
-        if (rows.length === 1) resolve(true)
-        resolve(false)
-      })
-  })
-}
+        if (rows.length === 1) resolve(true);
+        resolve(false);
+      }
+    );
+  });
+};
 
 const showEdit = (fk_usuario) => {
   return new Promise((resolve, reject) => {
     db.query(
-      "SELECT * FROM cheesebox.recetas where fk_usuario = ?",
+      "SELECT * FROM recetas where fk_usuario = ?",
       [fk_usuario],
       (err, rows) => {
         if (err) reject(err);
@@ -189,5 +188,5 @@ module.exports = {
   getFav,
   deleteFav,
   checkFav,
-  showEdit
+  showEdit,
 };
